@@ -8,10 +8,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {connect} from 'react-redux';
+import {addTodo} from '../actions';
 const AddTodo = props => {
   const [text, setText] = useState('');
   const addTodo = text => {
-    props.dispatch({type: 'ADD_TODO', text});
+    props.dispatch(addTodo(text));
     setText('');
   };
   return (
@@ -19,8 +20,8 @@ const AddTodo = props => {
       <View style={{flexDirection: 'row', marginHorizontal: 20}}>
         <TextInput
           onChangeText={text => setText(text)}
-          placeholder="eg create"
           value={text}
+          placeholder="eg create"
           style={{
             borderWidth: 1,
             borderColor: '#eaeaea',
