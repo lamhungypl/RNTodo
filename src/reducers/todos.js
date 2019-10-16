@@ -19,6 +19,11 @@ const todos = (state = [], action) => {
           : todo;
       });
     }
+    case 'DELETE_TODO': {
+      return state.filter(todo => {
+        return todo.id !== action.id;
+      });
+    }
 
     default: {
       return state;
