@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -12,6 +12,9 @@ import store from './src/store';
 import {Provider} from 'react-redux';
 
 const App = () => {
+  // useEffect(() => {
+  //   console.log('store', store.getState());
+  // });
   return (
     <>
       <Provider store={store}>

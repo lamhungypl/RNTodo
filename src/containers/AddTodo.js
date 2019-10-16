@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,12 +9,20 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {addTodo} from '../actions';
+import store from '../store';
+
 const AddTodo = props => {
   const [text, setText] = useState('');
-  const addTodo = text => {
+  const addHandler = text => {
     props.dispatch(addTodo(text));
+    console.log('got add handler');
     setText('');
+
+    console.log('todoapp props: ', store.getState().todos);
   };
+  useEffect(() => {
+    console.log('text: ', text);
+  }, [text]);
   return (
     <>
       <View style={{flexDirection: 'row', marginHorizontal: 20}}>
@@ -23,6 +31,7 @@ const AddTodo = props => {
           value={text}
           placeholder="eg create"
           style={{
+            color: 'black',
             borderWidth: 1,
             borderColor: '#eaeaea',
             height: 50,
@@ -30,7 +39,7 @@ const AddTodo = props => {
             padding: 5,
           }}
         />
-        <TouchableOpacity onPress={() => addTodo(text)}>
+        <TouchableOpacity>
           <View
             style={{
               height: 50,
@@ -38,7 +47,7 @@ const AddTodo = props => {
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <Button title={'ADD'}></Button>
+            <Button title={'ADD'} onPress={() => addHandler(text)}></Button>
           </View>
         </TouchableOpacity>
       </View>
